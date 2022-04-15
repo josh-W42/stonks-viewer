@@ -1,24 +1,15 @@
 import React from 'react';
-import './App.css';
+import { Route, Routes as Switch } from 'react-router-dom';
 
-function App() {
+const StonksViewer: React.FunctionComponent = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to ok.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route path="/" />
+      <Route path="/users/:userId" />
+      <Route path="/stocks/:stockId" />
+      <Route path="/dashboard/:userId" />
+    </Switch>
   );
-}
+};
 
-export default App;
+export default StonksViewer;
