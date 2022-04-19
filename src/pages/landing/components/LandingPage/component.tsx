@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { IExchangeRate } from './models';
 import { EXCHANGE_RATES } from './queries';
+import { Button } from 'primereact/button';
 
 export const LandingPageComponent: React.FunctionComponent = () => {
   // An example method of using gql queries
@@ -24,12 +25,12 @@ export const LandingPageComponent: React.FunctionComponent = () => {
   return (
     <div>
       <h1>HI THIS IS THE HOME PAGE</h1>
-      <button>
-        <Link to={'/login'}>Login</Link>
-      </button>
-      <button>
-        <Link to={'/signUp'}>SignUp</Link>
-      </button>
+      <Link to={'/login'}>
+        <Button label="Login" className="p-button-outline p-button-text" />
+      </Link>
+      <Link to={'/signUp'}>
+        <Button label="Signup" className="p-button-outline p-button-text" />
+      </Link>
       {ExchangeRates()}
     </div>
   );
