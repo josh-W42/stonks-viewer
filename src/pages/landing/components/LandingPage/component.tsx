@@ -1,26 +1,24 @@
-import { useQuery } from '@apollo/client';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IExchangeRate } from './models';
-import { EXCHANGE_RATES } from './queries';
 import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
 
 export const LandingPageComponent: React.FunctionComponent = () => {
   // An example method of using gql queries
-  const ExchangeRates = () => {
-    const { loading, error, data } = useQuery<IExchangeRate>(EXCHANGE_RATES);
+  // const ExchangeRates = () => {
+  //   const { loading, error, data } = useQuery<IBookResponse>(EXCHANGE_RATES);
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>An Error Occured</p>;
+  //   if (loading) return <p>Loading...</p>;
+  //   if (error) return <p>An Error Occured</p>;
 
-    return data?.rates.map(({ currency, rate }) => (
-      <div key={currency}>
-        <p>
-          {currency}: {rate}
-        </p>
-      </div>
-    ));
-  };
+  //   console.log(data);
+
+  //   return data?.books.map(({ title, author }) => (
+  //     <p key={title}>
+  //       {title}: {author}
+  //     </p>
+  //   ));
+  // };
 
   return (
     <div>
@@ -31,7 +29,12 @@ export const LandingPageComponent: React.FunctionComponent = () => {
       <Link to={'/signUp'}>
         <Button label="Signup" className="p-button-outline p-button-text" />
       </Link>
-      {ExchangeRates()}
+      <div className="col-12 md:col-4">
+        <div className="p-inputgroup">
+          <Button label="Search" />
+          <InputText placeholder="Keyword" />
+        </div>
+      </div>
     </div>
   );
 };

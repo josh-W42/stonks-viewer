@@ -3,34 +3,14 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import StonksViewer from './App';
 import reportWebVitals from './reportWebVitals';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  gql,
-} from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/lara-light-blue/theme.css';
 
 const client = new ApolloClient({
-  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  uri: 'http://localhost:4000/graphql',
   cache: new InMemoryCache(),
 });
-
-client
-  .query({
-    query: gql`
-      query GetRates {
-        rates(currency: "USD") {
-          currency
-        }
-      }
-    `,
-  })
-  .then((result) => console.log(result))
-  .catch((e) => {
-    console.error(e);
-  });
 
 ReactDOM.render(
   <React.StrictMode>
