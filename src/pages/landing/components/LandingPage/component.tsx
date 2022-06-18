@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
+import { StockSearchUnit } from '../../../../common/components/StockSearchUnit';
 
 export const LandingPageComponent: React.FunctionComponent = () => {
   // An example method of using gql queries
@@ -30,10 +30,7 @@ export const LandingPageComponent: React.FunctionComponent = () => {
         <Button label="Signup" className="p-button-outline p-button-text" />
       </Link>
       <div className="col-12 md:col-4">
-        <div className="p-inputgroup">
-          <Button label="Search" />
-          <InputText placeholder="Keyword" />
-        </div>
+        <StockSearchUnit />
       </div>
     </div>
   );
