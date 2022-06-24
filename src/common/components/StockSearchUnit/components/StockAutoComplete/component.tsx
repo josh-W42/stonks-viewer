@@ -16,10 +16,6 @@ export const StockAutocomplete: React.FunctionComponent = () => {
     { variables: { input: input.trim() } }
   );
 
-  if (selected) {
-    navigate(`/quotes/${selected.symbol}`);
-  }
-
   if (error) {
     console.log(error);
   }
@@ -39,6 +35,9 @@ export const StockAutocomplete: React.FunctionComponent = () => {
       }}
       onChange={(_, newValue) => {
         setSelected(newValue);
+        if (newValue) {
+          navigate(`/quotes/${newValue.symbol}`);
+        }
       }}
       onInputChange={(_, newValue) => setInput(newValue)}
       inputValue={input}
