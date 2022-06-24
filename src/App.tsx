@@ -7,7 +7,7 @@ const StonksViewer: React.FunctionComponent = () => {
     <Switch>
       <Route path="/" element={<LandingPage />} />
       <Route path="/users/:userId" />
-      <Route path="/stocks/:stockId" />
+      <Route path="/quotes/:stockSymbol" />
       <Route path="/dashboard/:userId" />
     </Switch>
   );

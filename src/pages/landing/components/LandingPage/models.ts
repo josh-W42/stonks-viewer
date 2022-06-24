@@ -1,9 +1,8 @@
-// These are for dumby data
-export interface IRate {
-  currency: string;
-  rate: string;
-}
+// export interface IBookResponse {
+//   books: IBooks[];
+// }
 
-export interface IExchangeRate {
-  rates: IRate[];
+export interface IBooks {
+  title: string;
+  author: string;
 }
