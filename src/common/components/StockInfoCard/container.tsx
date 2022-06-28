@@ -10,7 +10,7 @@ interface Props {
 
 export const StockInfoCard: React.FunctionComponent<Props> = ({ symbol }) => {
   const { loading, error, data } = useQuery<IQuoteResponse>(GET_QUOTE_ALL, {
-    variables: { input: symbol },
+    variables: { symbol },
   });
 
   if (error) {
