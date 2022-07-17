@@ -1,4 +1,9 @@
-export const transformDay = (id: number) => {
+/**
+ * Formats a given day of the week id into a more human readable version.
+ * @param id - An ID of the day of the week.
+ * @returns
+ */
+export const formatDayOfWeek = (id: number) => {
   switch (id) {
     case 0:
       return 'Sunday';
@@ -14,5 +19,7 @@ export const transformDay = (id: number) => {
       return 'Friday';
     case 6:
       return 'Saturday';
+    default:
+      return 'Invalid Day';
   }
 };

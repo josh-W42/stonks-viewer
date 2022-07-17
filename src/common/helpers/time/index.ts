@@ -1,2 +1,3 @@
-export * from './transformDay';
-export * from './getTime';
+export * from './formatDayOfWeek';
+export * from './formatTime';
+export * from './formatMonth';
