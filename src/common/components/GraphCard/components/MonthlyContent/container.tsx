@@ -23,8 +23,12 @@ export const MonthlyContent: React.FunctionComponent<Props> = ({ symbol }) => {
       loading={loading}
       error={error ? true : false}
       config={{
-        xAxis: { includeYear: true },
-        toolTip: { includeYear: true, includeDayOfWeek: false },
+        xAxis: { includeYear: true, includeDay: false },
+        toolTip: {
+          includeYear: true,
+          includeDayOfWeek: false,
+          includeDay: false,
+        },
       }}
     />
   );

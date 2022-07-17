@@ -1,4 +1,4 @@
-import { getTime, transformDay } from '../../../../helpers';
+import { formatMonth, formatTime, formatDayOfWeek } from '../../../../helpers';
 import { IBaseGraphCardConfig } from './config';
 
 /**
@@ -16,17 +16,19 @@ export const formatAxisTime = (
   let output = '';
 
   if (config?.xAxis?.includeMonth) {
-    output += date.getMonth() + 1;
+    output += formatMonth(date.getMonth());
   }
 
-  output += `/${date.getDate()}`;
+  if (config.toolTip?.includeDay) {
+    output += ` ${date.getDate()}`;
+  }
 
   if (config?.xAxis?.includeYear) {
-    output += `/${date.getFullYear()}`;
+    output += ` ${date.getFullYear()}`;
   }
 
   if (config?.xAxis?.includeTime) {
-    output += ` - ${getTime(date)}`;
+    output += ` - ${formatTime(date)}`;
   }
 
   return output;
@@ -47,17 +49,21 @@ export const formatToolTipTime = (
   let output = '';
 
   if (config?.toolTip?.includeDayOfWeek) {
-    output += `${transformDay(date.getDay())} - `;
+    output += `${formatDayOfWeek(date.getDay())} - `;
   }
 
-  output += `${date.getMonth() + 1}/${date.getDate()}`;
+  output += `${formatMonth(date.getMonth())}`;
+
+  if (config.toolTip?.includeDay) {
+    output += ` ${date.getDate()}`;
+  }
 
   if (config?.toolTip?.includeYear) {
-    output += `/${date.getFullYear()}`;
+    output += ` ${date.getFullYear()}`;
   }
 
   if (config?.toolTip?.includeTime) {
-    output += ` - ${getTime(date)}`;
+    output += ` - ${formatTime(date)}`;
   }
 
   return output;
