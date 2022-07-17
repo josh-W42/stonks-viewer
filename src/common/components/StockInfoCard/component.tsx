@@ -36,11 +36,11 @@ export const StockInforCardComponent: React.FunctionComponent<Props> = ({
         <Typography>Low: {quote?.low}</Typography>
         <Typography>Latest Trading Day: {quote?.latestTradingDay}</Typography>
         <Typography>Previous Close: {quote?.previousClose}</Typography>
-        <Typography color={quote?.change.startsWith('-') ? 'green' : 'red'}>
-          Chnage: {quote?.change}
+        <Typography color={quote?.change && quote.change < 0 ? 'red' : 'green'}>
+          Change: {quote?.change}
         </Typography>
         <Typography
-          color={quote?.changePercent.startsWith('-') ? 'green' : 'red'}
+          color={quote?.changePercent.startsWith('-') ? 'red' : 'green'}
         >
           Change Percent: {quote?.changePercent}
         </Typography>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StockInfoCard } from '../../common/components/StockInfoCard';
+import { GraphCard, StockInfoCard } from '../../common/components';
 
 interface Props {
   symbol: string;
@@ -12,6 +12,7 @@ export const QuotePageComponent: React.FunctionComponent<Props> = ({
     <div>
       <h1>This is the quote page for: {symbol}!</h1>
       <StockInfoCard symbol={symbol} />
+      <GraphCard symbol={symbol} />
     </div>
   );
 };
