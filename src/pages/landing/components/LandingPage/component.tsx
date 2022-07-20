@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { StockSearchUnit } from '../../../../common/components/StockSearchUnit';
+import { StockSearchCard } from '../../../../common/components/StockSearchCard';
 import Button from '@mui/material/Button';
 
 export const LandingPageComponent: React.FunctionComponent = () => {
@@ -14,7 +14,7 @@ export const LandingPageComponent: React.FunctionComponent = () => {
         <Button variant={'outlined'}>Signup</Button>
       </Link>
       <div className="col-12 md:col-4">
-        <StockSearchUnit />
+        <StockSearchCard />
       </div>
     </div>
   );
