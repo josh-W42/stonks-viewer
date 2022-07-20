@@ -17,9 +17,21 @@ import { DEFAULT_CONFIG, IBaseGraphCardConfig } from './config';
 import { formatAxisTime, formatToolTipTime } from './helpers';
 
 interface Props {
+  /**
+   * The data returned from a GraphQL query, undefined if in loading and error state.
+   */
   data?: IRecordContainer;
+  /**
+   * One of the states for the card, used if a query is in flight.
+   */
   loading?: boolean;
+  /**
+   * One of the states for the card, used when there is no network or an error has occurred on the backend.
+   */
   error?: boolean;
+  /**
+   * The configuration of the graph card mainly for formatting and display settings.
+   */
   config?: IBaseGraphCardConfig;
 }
 
@@ -115,7 +127,7 @@ export const BaseGraphCardContentComponent: React.FunctionComponent<Props> = ({
                   </Card>
                 );
               }
-              return <></>;
+              return null;
             }}
           />
           <Legend />

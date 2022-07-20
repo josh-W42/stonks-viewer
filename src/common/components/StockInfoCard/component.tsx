@@ -11,7 +11,7 @@ interface Props {
   symbol: string;
 }
 
-export const StockInforCardComponent: React.FunctionComponent<Props> = ({
+export const StockInfoCardComponent: React.FunctionComponent<Props> = ({
   loading,
   error,
   quote,
@@ -26,25 +26,23 @@ export const StockInforCardComponent: React.FunctionComponent<Props> = ({
   }
 
   return (
-    <Card sx={{ minWidth: 275, maxWidth: 300, minHeight: 300 }}>
-      <CardContent>
-        <Typography variant="h2">{quote?.symbol}</Typography>
-        <Typography>Price: {quote?.price}</Typography>
-        <Typography>Volume: {quote?.volume}</Typography>
-        <Typography>Open: {quote?.open}</Typography>
-        <Typography>High: {quote?.high}</Typography>
-        <Typography>Low: {quote?.low}</Typography>
-        <Typography>Latest Trading Day: {quote?.latestTradingDay}</Typography>
-        <Typography>Previous Close: {quote?.previousClose}</Typography>
-        <Typography color={quote?.change && quote.change < 0 ? 'red' : 'green'}>
-          Change: {quote?.change}
-        </Typography>
-        <Typography
-          color={quote?.changePercent.startsWith('-') ? 'red' : 'green'}
-        >
-          Change Percent: {quote?.changePercent}
-        </Typography>
-      </CardContent>
-    </Card>
+    <CardContent>
+      <Typography variant="h2">{quote?.symbol}</Typography>
+      <Typography>Price: {quote?.price}</Typography>
+      <Typography>Volume: {quote?.volume}</Typography>
+      <Typography>Open: {quote?.open}</Typography>
+      <Typography>High: {quote?.high}</Typography>
+      <Typography>Low: {quote?.low}</Typography>
+      <Typography>Latest Trading Day: {quote?.latestTradingDay}</Typography>
+      <Typography>Previous Close: {quote?.previousClose}</Typography>
+      <Typography color={quote?.change && quote.change < 0 ? 'red' : 'green'}>
+        Change: {quote?.change}
+      </Typography>
+      <Typography
+        color={quote?.changePercent.startsWith('-') ? 'red' : 'green'}
+      >
+        Change Percent: {quote?.changePercent}
+      </Typography>
+    </CardContent>
   );
 };
