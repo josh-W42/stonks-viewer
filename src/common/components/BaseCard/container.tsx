@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { BaseCardParams, CardTypes, CustomDialogFormParams } from '../../types';
 import { CardConfigDialog } from '../CardConfigDialog';
 
-interface CustomConfig {
+export interface CustomConfig {
   formConfig: (props: CustomDialogFormParams) => React.ReactNode;
 }
 
@@ -34,7 +34,14 @@ export const BaseCard: React.FunctionComponent<Props> = ({
   const [shouldDialogClose, setShouldDialogClose] = useState<boolean>(false);
 
   return (
-    <Card sx={sx}>
+    <Card
+      sx={{
+        ...sx,
+        width: '100%',
+      }}
+      elevation={config ? 3 : 0}
+      id={type}
+    >
       {config && (
         <CardHeader
           title={type}

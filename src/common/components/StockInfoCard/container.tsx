@@ -8,7 +8,13 @@ import { GET_QUOTE_ALL } from './queries';
 import { IQuoteResponse } from './types';
 
 interface Props {
+  /**
+   * The symbol of global token
+   */
   symbol: string;
+  /**
+   * Whether or not the card is customizable.
+   */
   isCustom?: true | undefined;
 }
 

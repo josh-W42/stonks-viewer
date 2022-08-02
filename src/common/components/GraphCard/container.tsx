@@ -49,7 +49,6 @@ export const GraphCard: React.FunctionComponent<Props> = ({
 
   return (
     <BaseCard
-      sx={{ width: '100%' }}
       component={(props) => {
         return (
           <GraphCardComponent
