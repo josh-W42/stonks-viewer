@@ -38,7 +38,10 @@ export const NewsCard: React.FunctionComponent<Props> = ({
 
   return (
     <BaseCard
-      sx={{ maxWidth: 700, overflow: 'auto', wordBreak: 'break-word' }}
+      sx={{
+        overflow: 'auto',
+        wordBreak: 'break-word',
+      }}
       component={(params) => (
         <NewsCardComponent {...params} content={getContent(type)} />
       )}
