@@ -1,4 +1,4 @@
-import { Pagination } from '@mui/material';
+import { Box, Grid, Pagination } from '@mui/material';
 import React from 'react';
 
 interface Props {
@@ -16,12 +16,14 @@ export const PaginatedListComponent: React.FunctionComponent<Props> = ({
 }) => {
   return (
     <React.Fragment>
-      {data}
-      <Pagination
-        count={count}
-        page={page}
-        onChange={(_, value) => handleChange(value)}
-      />
+      <Grid container>{data}</Grid>
+      <Box sx={{ justifyContent: 'center', display: 'flex' }}>
+        <Pagination
+          count={count}
+          page={page}
+          onChange={(_, value) => handleChange(value)}
+        />
+      </Box>
     </React.Fragment>
   );
 };

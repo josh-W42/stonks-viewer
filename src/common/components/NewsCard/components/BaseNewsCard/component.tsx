@@ -15,7 +15,11 @@ interface Props {
 }
 
 interface IBaseNewsCardConfig {
-  mobile?: true | undefined;
+  /**
+   * The news card is paginated and the default count is
+   * The number of articles you would like presented.
+   */
+  articleCount?: number;
 }
 
 export const BaseNewsCard: React.FunctionComponent<Props> = ({
@@ -51,78 +55,87 @@ export const BaseNewsCard: React.FunctionComponent<Props> = ({
     });
 
     return (
-      <ListItem
+      <Grid
+        item
+        xs={12}
+        md={6}
         key={`${article.time_published}-${Math.random() * 10000}`}
-        sx={{
-          padding: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          width: '100%',
-        }}
       >
-        <Typography
+        <ListItem
           sx={{
-            color: 'inherit',
-            textDecoration: 'none',
-            fontWeight: 'bolder',
-            alignSelf: 'start',
+            padding: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
           }}
-          variant="h6"
-          component={'a'}
-          href={article.url}
-          target={'_blank'}
-          rel={'noopener noreferrer'}
         >
-          {article.title}
-        </Typography>
-        <Grid container>
-          <Grid item xs={6}>
-            <Typography variant={'subtitle2'}>{article.source}</Typography>
-          </Grid>
-          <Grid item xs={6} sx={{ textAlign: 'right' }}>
-            <Typography variant="caption">
-              {formatNewsDate(article.time_published ?? '')}
-            </Typography>
-          </Grid>
-          {article.banner_image ? (
-            <Grid item xs={12} sm={4} sx={{ padding: 1 }}>
-              <img
-                style={{ borderRadius: 10 }}
-                alt={'Article Image, Content Unknown'}
-                src={article.banner_image}
-                width={'100%'}
-              />
+          <Typography
+            sx={{
+              color: 'inherit',
+              textDecoration: 'none',
+              fontWeight: 'bolder',
+              alignSelf: 'start',
+            }}
+            variant="subtitle1"
+            component={'a'}
+            href={article.url}
+            target={'_blank'}
+            rel={'noopener noreferrer'}
+          >
+            {article.title}
+          </Typography>
+          <Grid container>
+            <Grid item xs={6}>
+              <Typography variant={'subtitle2'}>{article.source}</Typography>
             </Grid>
-          ) : null}
-          <Grid item xs={12} sm={8} sx={{ padding: 0.5 }}>
-            <Typography
-              variant="body1"
-              component={'summary'}
-              sx={{ wordBreak: 'break-word', marginBottom: 1 }}
-            >
-              {article.summary}
-            </Typography>
-            {article.ticker_sentiment && article.ticker_sentiment.length > 0 ? (
-              <React.Fragment>
-                <Typography fontWeight={'bold'}>Related:</Typography> {tickers}
-              </React.Fragment>
-            ) : null}
-          </Grid>
-          {article.topics && article.topics.length > 0 ? (
-            <Grid item xs={12}>
-              <Typography>
-                Topics: {article.topics?.map((topic) => topic.topic).toString()}
+            <Grid item xs={6} sx={{ textAlign: 'right' }}>
+              <Typography variant="caption">
+                {formatNewsDate(article.time_published ?? '')}
               </Typography>
             </Grid>
-          ) : null}
-        </Grid>
-      </ListItem>
+            {article.banner_image ? (
+              <Grid item xs={12} sm={4} sx={{ padding: 1 }}>
+                <img
+                  style={{ borderRadius: 10 }}
+                  alt={'Article Image, Content Unknown'}
+                  src={article.banner_image}
+                  width={'100%'}
+                />
+              </Grid>
+            ) : null}
+            <Grid item xs={12} sm={8} sx={{ padding: 0.5 }}>
+              <Typography
+                variant="body1"
+                component={'summary'}
+                sx={{ wordBreak: 'break-word', marginBottom: 1 }}
+              >
+                {article.summary}
+              </Typography>
+              {article.ticker_sentiment &&
+              article.ticker_sentiment.length > 0 ? (
+                <React.Fragment>
+                  <Typography fontWeight={'bold'}>Related:</Typography>{' '}
+                  {tickers}
+                </React.Fragment>
+              ) : null}
+            </Grid>
+            {article.topics && article.topics.length > 0 ? (
+              <Grid item xs={12}>
+                <Typography>
+                  Topics:{' '}
+                  {article.topics?.map((topic) => topic.topic).toString()}
+                </Typography>
+              </Grid>
+            ) : null}
+          </Grid>
+        </ListItem>
+      </Grid>
     );
   });
 
   return (
     <List dense>
-      <PaginatedList count={2} data={articles} />
+      <PaginatedList count={4} data={articles} />
     </List>
   );
 };
