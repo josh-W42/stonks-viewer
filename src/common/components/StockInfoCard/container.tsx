@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CardTypes } from '../../types';
 import { BaseCard, CustomConfig } from '../BaseCard';
 import { StockInfoCardComponent } from './component';
@@ -11,7 +11,7 @@ interface Props {
   /**
    * The symbol of global token
    */
-  symbol: string;
+  symbol?: string;
   /**
    * Whether or not the card is customizable.
    */
@@ -27,6 +27,12 @@ export const StockInfoCard: React.FunctionComponent<Props> = ({
   isCustom,
 }) => {
   const [symbol, setSymbol] = useState(inheritedSymbol ?? '');
+
+  useEffect(() => {
+    if (inheritedSymbol && inheritedSymbol !== symbol) {
+      setSymbol(inheritedSymbol);
+    }
+  }, [inheritedSymbol]);
 
   const { loading, error, data } = useQuery<IQuoteResponse>(GET_QUOTE_ALL, {
     variables: { symbol },

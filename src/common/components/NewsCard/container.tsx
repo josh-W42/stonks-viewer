@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CardTypes } from '../../types';
 import { BaseCard, CustomConfig } from '../BaseCard';
 import { ErrorCard } from '../ErrorCard';
@@ -38,6 +38,16 @@ export const NewsCard: React.FunctionComponent<Props> = ({
 }) => {
   const [symbols, setSymbols] = useState<string[]>(inheritedSymbols ?? []);
   const [topics, setTopics] = useState<NewsCardTopic[]>(inheritedTopics ?? []);
+
+  useEffect(() => {
+    if (inheritedSymbols) {
+      setSymbols(inheritedSymbols);
+    }
+
+    if (inheritedTopics) {
+      setTopics(inheritedTopics);
+    }
+  }, [inheritedSymbols, inheritedTopics]);
 
   const getContent = (type: NewsCardTypes): React.ReactNode => {
     switch (type) {

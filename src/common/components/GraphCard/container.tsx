@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CardTypes } from '../../types';
 import { BaseCard, CustomConfig } from '../BaseCard';
 import { ErrorCard } from '../ErrorCard';
@@ -30,6 +30,12 @@ export const GraphCard: React.FunctionComponent<Props> = ({
 }) => {
   const [timeId, setTimeId] = useState<GraphTimeIds>(GraphTimeIds.Daily);
   const [symbol, setSymbol] = useState(inheritedSymbol ?? '');
+
+  useEffect(() => {
+    if (inheritedSymbol && inheritedSymbol !== symbol) {
+      setSymbol(inheritedSymbol);
+    }
+  }, [inheritedSymbol]);
 
   const getContent = (id: GraphTimeIds, symbol: string) => {
     switch (id) {
