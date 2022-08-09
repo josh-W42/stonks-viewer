@@ -1,4 +1,4 @@
-import { formatMonth, formatTime, formatDayOfWeek } from '../../../../helpers';
+import { formatMonth, formatDayOfWeek, formatTime } from '../../../../helpers';
 import { IBaseGraphCardConfig } from './config';
 
 /**

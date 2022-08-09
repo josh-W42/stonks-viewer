@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CardTypes } from '../../types';
-import { BaseCard } from '../BaseCard';
+import { BaseCard, CustomConfig } from '../BaseCard';
 import { ErrorCard } from '../ErrorCard';
 import { GraphCardComponent } from './component';
 import { DailyContent, IntraDayContent, WeeklyContent } from './components';
@@ -20,12 +20,22 @@ interface Props {
   isCustom?: true | undefined;
 }
 
+export interface GraphFormResponse {
+  symbol: string;
+}
+
 export const GraphCard: React.FunctionComponent<Props> = ({
   symbol: inheritedSymbol,
   isCustom,
 }) => {
   const [timeId, setTimeId] = useState<GraphTimeIds>(GraphTimeIds.Daily);
   const [symbol, setSymbol] = useState(inheritedSymbol ?? '');
+
+  useEffect(() => {
+    if (inheritedSymbol && inheritedSymbol !== symbol) {
+      setSymbol(inheritedSymbol);
+    }
+  }, [inheritedSymbol]);
 
   const getContent = (id: GraphTimeIds, symbol: string) => {
     switch (id) {
@@ -47,9 +57,17 @@ export const GraphCard: React.FunctionComponent<Props> = ({
     }
   };
 
+  const graphConfig: CustomConfig<GraphFormResponse> = {
+    submitCb: ({ symbol }) => {
+      setSymbol(symbol);
+    },
+    formConfig(props) {
+      return <GraphCardForm {...props} symbol={symbol} />;
+    },
+  };
+
   return (
     <BaseCard
-      sx={{ width: '100%' }}
       component={(props) => {
         return (
           <GraphCardComponent
@@ -60,19 +78,7 @@ export const GraphCard: React.FunctionComponent<Props> = ({
         );
       }}
       type={CardTypes.Graph}
-      config={
-        isCustom && {
-          formConfig: (props) => {
-            return (
-              <GraphCardForm
-                {...props}
-                symbol={symbol}
-                setSymbol={(val) => setSymbol(val)}
-              />
-            );
-          },
-        }
-      }
+      config={isCustom && graphConfig}
     />
   );
 };

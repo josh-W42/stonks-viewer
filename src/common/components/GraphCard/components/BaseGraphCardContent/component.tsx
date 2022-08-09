@@ -59,7 +59,7 @@ export const BaseGraphCardContentComponent: React.FunctionComponent<Props> = ({
   };
 
   return (
-    <CardContent>
+    <React.Fragment>
       <Typography>Description: {data?.metadata?.about}</Typography>
       <Typography>
         Symbol: {data?.metadata?.symbol}. Region: {data?.metadata?.timeZone}
@@ -133,6 +133,6 @@ export const BaseGraphCardContentComponent: React.FunctionComponent<Props> = ({
           <Legend />
         </AreaChart>
       </ResponsiveContainer>
-    </CardContent>
+    </React.Fragment>
   );
 };

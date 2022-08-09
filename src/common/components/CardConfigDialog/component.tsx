@@ -13,6 +13,7 @@ interface Props {
   open: boolean;
   handleOpen: () => void;
   handleClose: () => void;
+  handleSubmit: () => void;
   formContent: React.ReactNode;
 }
 
@@ -20,6 +21,7 @@ export const CardConfigDialogComponent: React.FunctionComponent<Props> = ({
   open,
   handleOpen,
   handleClose,
+  handleSubmit,
   formContent,
 }) => {
   return (
@@ -46,6 +48,7 @@ export const CardConfigDialogComponent: React.FunctionComponent<Props> = ({
           </Box>
         </DialogContent>
         <DialogActions>
+          <Button onClick={handleSubmit}>Submit</Button>
           <Button onClick={handleClose}>Close</Button>
         </DialogActions>
       </Dialog>

@@ -1,15 +1,25 @@
 import { useQuery } from '@apollo/client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CardTypes } from '../../types';
-import { BaseCard } from '../BaseCard';
-import { GraphCardForm } from '../GraphCard/components/GraphCardForm';
+import { BaseCard, CustomConfig } from '../BaseCard';
 import { StockInfoCardComponent } from './component';
+import { InfoCardForm } from './components';
 import { GET_QUOTE_ALL } from './queries';
 import { IQuoteResponse } from './types';
 
 interface Props {
-  symbol: string;
+  /**
+   * The symbol of global token
+   */
+  symbol?: string;
+  /**
+   * Whether or not the card is customizable.
+   */
   isCustom?: true | undefined;
+}
+
+export interface InfoFormResponse {
+  symbol: string;
 }
 
 export const StockInfoCard: React.FunctionComponent<Props> = ({
@@ -18,6 +28,12 @@ export const StockInfoCard: React.FunctionComponent<Props> = ({
 }) => {
   const [symbol, setSymbol] = useState(inheritedSymbol ?? '');
 
+  useEffect(() => {
+    if (inheritedSymbol && inheritedSymbol !== symbol) {
+      setSymbol(inheritedSymbol);
+    }
+  }, [inheritedSymbol]);
+
   const { loading, error, data } = useQuery<IQuoteResponse>(GET_QUOTE_ALL, {
     variables: { symbol },
   });
@@ -25,6 +41,15 @@ export const StockInfoCard: React.FunctionComponent<Props> = ({
   if (error) {
     console.error(error);
   }
+
+  const infoConfig: CustomConfig<InfoFormResponse> = {
+    submitCb({ symbol }) {
+      setSymbol(symbol);
+    },
+    formConfig(props) {
+      return <InfoCardForm {...props} symbol={symbol} />;
+    },
+  };
 
   return (
     <BaseCard
@@ -41,19 +66,7 @@ export const StockInfoCard: React.FunctionComponent<Props> = ({
         );
       }}
       type={CardTypes.Info}
-      config={
-        isCustom && {
-          formConfig: (props) => {
-            return (
-              <GraphCardForm
-                {...props}
-                symbol={symbol}
-                setSymbol={(val) => setSymbol(val)}
-              />
-            );
-          },
-        }
-      }
+      config={isCustom && infoConfig}
     />
   );
 };

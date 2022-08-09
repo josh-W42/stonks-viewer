@@ -26,7 +26,7 @@ export const StockInfoCardComponent: React.FunctionComponent<Props> = ({
   }
 
   return (
-    <CardContent>
+    <React.Fragment>
       <Typography variant="h2">{quote?.symbol}</Typography>
       <Typography>Price: {quote?.price}</Typography>
       <Typography>Volume: {quote?.volume}</Typography>
@@ -43,6 +43,6 @@ export const StockInfoCardComponent: React.FunctionComponent<Props> = ({
       >
         Change Percent: {quote?.changePercent}
       </Typography>
-    </CardContent>
+    </React.Fragment>
   );
 };
