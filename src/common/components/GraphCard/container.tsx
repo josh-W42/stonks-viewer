@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CardTypes } from '../../types';
-import { BaseCard } from '../BaseCard';
+import { BaseCard, CustomConfig } from '../BaseCard';
 import { ErrorCard } from '../ErrorCard';
 import { GraphCardComponent } from './component';
 import { DailyContent, IntraDayContent, WeeklyContent } from './components';
@@ -18,6 +18,10 @@ interface Props {
    * Whether or not the card is customizable.
    */
   isCustom?: true | undefined;
+}
+
+export interface GraphFormResponse {
+  symbol: string;
 }
 
 export const GraphCard: React.FunctionComponent<Props> = ({
@@ -47,6 +51,15 @@ export const GraphCard: React.FunctionComponent<Props> = ({
     }
   };
 
+  const graphConfig: CustomConfig<GraphFormResponse> = {
+    submitCb: ({ symbol }) => {
+      setSymbol(symbol);
+    },
+    formConfig(props) {
+      return <GraphCardForm {...props} symbol={symbol} />;
+    },
+  };
+
   return (
     <BaseCard
       component={(props) => {
@@ -59,19 +72,7 @@ export const GraphCard: React.FunctionComponent<Props> = ({
         );
       }}
       type={CardTypes.Graph}
-      config={
-        isCustom && {
-          formConfig: (props) => {
-            return (
-              <GraphCardForm
-                {...props}
-                symbol={symbol}
-                setSymbol={(val) => setSymbol(val)}
-              />
-            );
-          },
-        }
-      }
+      config={isCustom && graphConfig}
     />
   );
 };

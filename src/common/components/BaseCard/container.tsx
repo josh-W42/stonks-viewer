@@ -4,11 +4,12 @@ import React, { useState } from 'react';
 import { BaseCardParams, CardTypes, CustomDialogFormParams } from '../../types';
 import { CardConfigDialog } from '../CardConfigDialog';
 
-export interface CustomConfig {
-  formConfig: (props: CustomDialogFormParams) => React.ReactNode;
+export interface CustomConfig<T> {
+  formConfig: (props: CustomDialogFormParams<T>) => React.ReactNode;
+  submitCb: (updated: T) => void;
 }
 
-interface Props {
+interface Props<T> {
   sx?: SxProps<Theme> | undefined;
   /**
    * The primary content to be displayed in the card.
@@ -22,16 +23,12 @@ interface Props {
   /**
    * Cards can be configurable for users, if the card is configurable, you must supply a config.
    */
-  config?: CustomConfig;
+  config?: CustomConfig<T>;
 }
 
-export const BaseCard: React.FunctionComponent<Props> = ({
-  component,
-  type,
-  config,
-  sx,
-}) => {
+export const BaseCard = <T,>({ component, type, config, sx }: Props<T>) => {
   const [shouldDialogClose, setShouldDialogClose] = useState<boolean>(false);
+  const [formData, setFormData] = useState<T>();
 
   return (
     <Card
@@ -49,9 +46,16 @@ export const BaseCard: React.FunctionComponent<Props> = ({
             <CardConfigDialog
               formContent={config.formConfig({
                 setCloseTrigger: (val) => setShouldDialogClose(val),
+                handleUpdate: (updated) => setFormData(updated),
               })}
               shouldClose={shouldDialogClose}
               setShouldClose={(val) => setShouldDialogClose(val)}
+              handleSubmit={() => {
+                if (typeof formData !== 'undefined') {
+                  config.submitCb(formData);
+                }
+                setShouldDialogClose(true);
+              }}
             />
           }
         />

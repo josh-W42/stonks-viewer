@@ -5,16 +5,16 @@ import { INewsResponse } from '../../types';
 import { BaseNewsCard } from '../BaseNewsCard';
 
 interface Props {
-  symbol: string;
+  symbols: string[];
 }
 
 export const NewsQuoteContent: React.FunctionComponent<Props> = ({
-  symbol,
+  symbols,
 }) => {
   const { loading, error, data } = useQuery<INewsResponse>(
     GET_NEWS_QUOTE_SPECIFIC,
     {
-      variables: { tickers: [symbol], limit: 10 },
+      variables: { tickers: symbols, limit: 10 },
     }
   );
 

@@ -24,6 +24,30 @@ export const GET_NEWS_QUOTE_SPECIFIC = gql`
   }
 `;
 
+export const GET_NEWS_GENERIC = gql`
+  query GetNewsGQL($tickers: [String], $topics: [String], $limit: Int) {
+    GetNewsGQL(tickers: $tickers, topics: $topics, limit: $limit) {
+      items
+      feed {
+        title
+        authors
+        summary
+        source
+        url
+        time_published
+        banner_image
+        source_domain
+        overall_sentiment_label
+        ticker_sentiment {
+          ticker
+          ticker_sentiment_score
+          ticker_sentiment_label
+        }
+      }
+    }
+  }
+`;
+
 // For Reference
 // const GET_NEWS_ALL = gql`
 //   query GetNewsGQL(

@@ -9,6 +9,7 @@ export interface BaseCardParams {
   isCustom?: boolean;
 }
 
-export interface CustomDialogFormParams {
+export interface CustomDialogFormParams<T> {
   setCloseTrigger: (val: boolean) => void;
+  handleUpdate: (updated: T) => void;
 }

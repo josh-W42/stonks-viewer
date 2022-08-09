@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
 import { CustomDialogFormParams } from '../../../../types';
+import { InfoFormResponse } from '../../container';
 import { GraphCardFormComponent } from './component';
 
-interface Props extends CustomDialogFormParams {
+interface Props extends CustomDialogFormParams<InfoFormResponse> {
   symbol: string;
-  setSymbol: (val: string) => void;
 }
 
 export const InfoCardForm: React.FunctionComponent<Props> = ({
   symbol,
-  setSymbol,
-  setCloseTrigger,
+  handleUpdate,
 }) => {
   const [formSymbol, setFormSymbol] = useState(symbol);
 
-  const handleChange = (val: string) => {
-    setFormSymbol(val);
-    setSymbol(val);
-    setCloseTrigger(true);
+  const handleChange = (symbol: string) => {
+    setFormSymbol(symbol);
+    handleUpdate({ symbol });
   };
 
   return (

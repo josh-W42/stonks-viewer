@@ -1,5 +1,6 @@
 import { Container } from '@mui/material';
 import React from 'react';
+import { GraphCard, StockInfoCard } from '../../common/components';
 import { NewsCard } from '../../common/components/NewsCard';
 import { NewsCardTypes } from '../../common/components/NewsCard/types';
 
@@ -21,9 +22,9 @@ export const QuotePageComponent: React.FunctionComponent<Props> = ({
       }}
     >
       <h1>This is the quote page for: {symbol}!</h1>
-      <NewsCard symbol={symbol} type={NewsCardTypes.Quote} />
-      {/* <StockInfoCard symbol={symbol} /> */}
-      {/* <GraphCard symbol={symbol} /> */}
+      <StockInfoCard symbol={symbol} />
+      <GraphCard symbol={symbol} />
+      <NewsCard type={NewsCardTypes.Quote} symbols={[symbol]} />
       {/* <PlaceholderCard />
       <ErrorCard /> */}
     </Container>

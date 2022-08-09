@@ -12,12 +12,17 @@ interface Props {
    * Prop that's used usually used to to reset shouldClose prop.
    */
   setShouldClose: (val: boolean) => void;
+  /**
+   * Prop used used to handle the submission of data.
+   */
+  handleSubmit: () => void;
 }
 
 export const CardConfigDialog: React.FunctionComponent<Props> = ({
   formContent,
   shouldClose,
   setShouldClose,
+  handleSubmit,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -41,6 +46,7 @@ export const CardConfigDialog: React.FunctionComponent<Props> = ({
       open={open}
       handleClose={handleClose}
       handleOpen={handleOpen}
+      handleSubmit={handleSubmit}
       formContent={formContent}
     />
   );
